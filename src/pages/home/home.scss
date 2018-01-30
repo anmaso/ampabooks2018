@@ -1,0 +1,29 @@
+page-home {
+    h3 {
+        font-size: 2rem;
+    }
+}
+
+h3 {
+    font-size: 2rem;
+}
+
+.selected {
+    background: #eee;
+}
+
+ion-badge {
+    font-size: 2em;
+}
+
+ion-badge.empty {
+    background-color: #eee;
+}
+
+.bookname {
+    font-size: 1.2em;
+}
+
+.item.item-md {
+    padding-left: 0px;
+}

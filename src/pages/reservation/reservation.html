@@ -1,0 +1,58 @@
+<!--
+  Generated template for the ReservationPage page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header>
+
+    <ion-navbar>
+        <ion-title>Reserva</ion-title>
+    </ion-navbar>
+
+</ion-header>
+
+
+<ion-content padding>
+    <p>Confirmar la reserva rellenando los datos del alumno y datos de contacto</p>
+    <ion-list>
+        <ion-item>
+            <ion-label color="primary" stacked>Nombre del alumno/a</ion-label>
+            <ion-input [(ngModel)]="name"></ion-input>
+        </ion-item>
+        <ion-item>
+            <ion-label color="primary" stacked>Apellido1 del alumno/a</ion-label>
+            <ion-input [(ngModel)]="surname1"></ion-input>
+        </ion-item>
+        <ion-item>
+            <ion-label color="primary" stacked>Apellido2 del alumno/a</ion-label>
+            <ion-input [(ngModel)]="surname2"></ion-input>
+        </ion-item>
+        <ion-item>
+            <ion-label color="primary" stacked>Nombre completo del padre o madre</ion-label>
+            <ion-input [(ngModel)]="parentName"></ion-input>
+        </ion-item>
+        <ion-item>
+            <ion-label color="primary" stacked>Teléfono</ion-label>
+            <ion-input [(ngModel)]="phone"></ion-input>
+        </ion-item>
+        <ion-item>
+            <ion-label color="primary" stacked>Email</ion-label>
+            <ion-input [(ngModel)]="email"></ion-input>
+        </ion-item>
+    </ion-list>
+    <h2>Total de la reserva: {{navParams.data.total}} €</h2>
+    <p>Tu reserva será la:
+        <ion-badge>{{reservationNumber}}</ion-badge>
+    </p>
+    <ion-list>
+        <ion-list-header>Libros reservados</ion-list-header>
+        <div ion-item *ngFor="let book of books">{{book.count}} x {{book.name}}</div>
+    </ion-list>
+
+</ion-content>
+<ion-footer>
+    <ion-toolbar>
+        <button ion-button>Confirmar la reserva</button>
+    </ion-toolbar>
+</ion-footer>

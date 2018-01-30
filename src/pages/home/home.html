@@ -1,0 +1,68 @@
+<ion-header>
+    <ion-navbar>
+        <button ion-button menuToggle>
+        <ion-icon name="menu"></ion-icon>
+      </button>
+        <ion-title>Reserva de libros</ion-title>
+    </ion-navbar>
+</ion-header>
+
+<ion-content>
+    <p padding>
+        Selecciona los libros deseados pinchando. Haz el pedido con el botón "reservar". Puedes filtrar los libros por curso.
+        <ion-item>
+            <ion-label>Selecciona curso</ion-label>
+            <ion-select [(ngModel)]="selectedCourse" interface="popover" (ionChange)="this.onSelectCourse($event)">
+                <ion-option *ngFor="let course of courses" [value]="course.value">{{course.name}}</ion-option>
+            </ion-select>
+        </ion-item>
+    </p>
+    <ion-list>
+        <ng-container *ngFor="let book of books">
+            <div ion-item *ngIf="book.visible" (click)="selectBook(book, $event)" [class.selected]="book.count>0">
+                <ion-grid>
+                    <ion-row>
+                        <ion-col col-1>
+                            {{book.group}}
+                        </ion-col>
+                        <ion-col text-wrap class="bookname">
+                            {{book.name}}
+                        </ion-col>
+                    </ion-row>
+                    <ion-row>
+                        <ion-col col-1>
+                        </ion-col>
+                        <ion-col>
+                            <h2>{{book.price}} €</h2>
+                        </ion-col>
+                        <ion-col>
+                            <span *ngIf="book.lang=='C'" class="castellano">Castellano</span>
+                            <span color="danger" *ngIf="book.lang=='V'" class="valencia">Valenciá</span>
+                        </ion-col>
+                    </ion-row>
+                </ion-grid>
+                <ion-badge item-end (click)="selectQuantity(book)" [class.empty]="book.count==0">
+                    {{book.count}}
+                </ion-badge>
+            </div>
+        </ng-container>
+    </ion-list>
+</ion-content>
+<ion-footer>
+    <ion-toolbar>
+        <ion-grid>
+            <ion-row>
+                <ion-col col-3>
+                    <button ion-button [disabled]="totalBooks==0" (click)="reservation()">Reserva</button>
+                </ion-col>
+                <ion-col col-3>
+                    <button ion-button [disabled]="totalBooks==0" color="danger" (click)="clearSelection()"><ion-icon name="trash"></ion-icon></button>
+                </ion-col>
+                <ion-col>
+                    <h4>{{totalBooks}} libros : {{total}} €</h4>
+                </ion-col>
+            </ion-row>
+
+        </ion-grid>
+    </ion-toolbar>
+</ion-footer>

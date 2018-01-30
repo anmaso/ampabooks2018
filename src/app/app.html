@@ -1,0 +1,19 @@
+<ion-menu #menu [content]="content">
+    <ion-header>
+        <ion-toolbar>
+            <ion-title>AMPA</ion-title>
+            <h2 padding>Sagrado Corazón de Jesús de Meliana</h2>
+        </ion-toolbar>
+    </ion-header>
+    <ion-content>
+        <ion-list>
+            <button ion-item (click)="openPage(rootPage)">
+                Reservar libros
+            </button>
+            <button ion-item (click)="openPage(ampa)">
+                Administración AMPA
+            </button>
+        </ion-list>
+    </ion-content>
+</ion-menu>
+<ion-nav #content [root]="rootPage"></ion-nav>
