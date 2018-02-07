@@ -3,12 +3,12 @@ export class Book {
     public count: number = 0;
     constructor(
         public id: number,
+        public course: string,
         public group: number,
         public name: string,
         public editorial: string,
-        public ISBN: string,
-        public course: string,
         public lang: string,
+        public ISBN: string,
         public price: number
     ) { }
 }

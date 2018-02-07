@@ -1451,13 +1451,10 @@ export class BookStoreService {
     ]
 
     constructor(private jsonp: Jsonp) {
-        jsonp.request('https://wt-7974bf26aea1e45a705bc8d98047e57c-0.run.webtask.io/webtask-sample?callback=JSONP_CALLBACK').toPromise()
-            .then(res=>{ console.log(res); return res.text()})
-            .catch(e=>console.error(e))
-
 
 
         var count = 1;
+        /*
         this.BOOKS = this.sBOOKS.map(b =>
             new Book(
                 count++,
@@ -1469,12 +1466,18 @@ export class BookStoreService {
                 b.lang,
                 b.price
             )).sort((a,b)=>a.group>b.group?1:b.group>a.group?-1:0)
+            */
 
     }
 
-    getBooks(): Promise<Book[]> {
-        console.log(this.BOOKS);
-        return Promise.resolve(this.BOOKS);
+    getBooks(): Promise<any> {
+        var URL='https://wt-7974bf26aea1e45a705bc8d98047e57c-0.run.webtask.io/ampa-get-books';
+        return this.jsonp.request(URL+'?callback=JSONP_CALLBACK',{params:{dc:Math.random()}}).toPromise()
+            .then(res=>  res.text())
+            .then(text=>{
+                return this.BOOKS=text.split('#').map((line,idx)=>new Book(idx+1, ...line.split(',')))
+            })
+            .catch(e=>console.error(e))
     }
 
 }
