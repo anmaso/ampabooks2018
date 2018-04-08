@@ -7,21 +7,50 @@
 <ion-header>
 
     <ion-navbar>
+        <button ion-button menuToggle>
+        <ion-icon name="menu"></ion-icon>
+      </button>
         <ion-title>Listado de reservas</ion-title>
     </ion-navbar>
-    <ion-item>
+    <ion-grid *ngIf="bookings.length==0">
+        <ion-row>
+            <ion-col>
+                <ion-label color="primary" stacked>Teléfono</ion-label>
+                <ion-input [(ngModel)]="phone" placeholder="Teléfono"></ion-input>
+            </ion-col>
+            <ion-col>
+                <ion-label color="primary" stacked>Código AMPA</ion-label>
+                <ion-input [(ngModel)]="code" placeholder="Código"></ion-input>
+            </ion-col>
+            <ion-col>
+                <ion-label color="primary" stacked></ion-label>
+                <button ion-button color="primary" (click)="query()">Validar&nbsp;&nbsp;
+                    <ion-icon name="checkmark"></ion-icon>
+                </button>
+            </ion-col>
+        </ion-row>
+    </ion-grid>
+    <ion-grid *ngIf="bookings.length">
+        <ion-row>
         <ion-label color="primary" fixed>Filtrar</ion-label>
         <ion-input #filterText placeholder="Código de reserva, nombre" (input)="filterChange(filterText.value)"></ion-input>
-    </ion-item>
+        </ion-row>
+    </ion-grid>
 
 </ion-header>
 
-
 <ion-content>
-    <ion-list>
+   <ng-container *ngIf="booking!=null">
+       <button ion-button color="primary" (click)="closeBooking()">
+           Close
+           <ion-icon name="close-circle"></ion-icon>
+       </button>
+    <booking [booking]="booking"></booking>
+   </ng-container> 
+    <ion-list *ngIf="!booking">
         <ng-container *ngFor="let booking of bookings">
-            <div ion-item *ngIf="booking.visible">
-                <ion-badge>{{booking.id}}</ion-badge>
+            <div ion-item *ngIf="booking.visible" (click)="selectBooking(booking)">
+                <ion-badge>{{booking.code}}</ion-badge>
                 {{booking.name}}
             </div>
         </ng-container>

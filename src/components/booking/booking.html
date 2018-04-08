@@ -1,0 +1,59 @@
+<div *ngIf="booking.name">
+    <ion-grid>
+        <ion-row>
+            <ion-col col-3>Fecha reserva: </ion-col>
+            <ion-col>
+                <b>
+                    <ion-datetime displayFormat="MM/DD/YYYY" [(ngModel)]="booking.date"></ion-datetime>
+                </b>
+            </ion-col>
+
+        </ion-row>
+        <ion-row>
+            <ion-col col-3>Nombre</ion-col>
+            <ion-col>
+                <b>{{booking.name}}</b>
+            </ion-col>
+        </ion-row>
+        <ion-row>
+            <ion-col col-3>Madre</ion-col>
+            <ion-col>
+                <b>{{booking.mother}}</b>
+            </ion-col>
+        </ion-row>
+        <ion-row>
+            <ion-col col-3>Padre</ion-col>
+            <ion-col>
+                <b>{{booking.father}}</b>
+            </ion-col>
+        </ion-row>
+        <ion-row>
+            <ion-col col-3> Libros: </ion-col>
+            <ion-col>
+                <b>{{totalBooks}}</b>
+            </ion-col>
+        </ion-row>
+        <ion-row>
+            <ion-col col-3> Precio total: </ion-col>
+            <ion-col>
+                <b>{{total}} €</b>
+            </ion-col>
+        </ion-row>
+    </ion-grid>
+</div>
+<ng-container *ngFor="let book of booking.books">
+    <ion-card>
+        <ion-card-header>
+            {{book.name}}
+        </ion-card-header>
+        <ion-card-content>
+            <ion-grid>
+                <ion-row>
+                    <ion-col>{{book.count>1? book.count+' x ':''}} {{book.price}} €</ion-col>
+                    <ion-col>{{book.course}}</ion-col>
+                    <ion-col>{{book.ISBN}}</ion-col>
+                </ion-row>
+            </ion-grid>
+        </ion-card-content>
+    </ion-card>
+</ng-container>

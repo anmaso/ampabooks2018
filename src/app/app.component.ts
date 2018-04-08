@@ -6,6 +6,7 @@ import { SplashScreen } from '@ionic-native/splash-screen';
 
 import { HomePage } from '../pages/home/home';
 import { AmpaPage } from '../pages/ampa/ampa';
+import { QueryBookingPage } from '../pages/query-booking/query-booking';
 
 @Component({
   templateUrl: 'app.html'
@@ -13,8 +14,10 @@ import { AmpaPage } from '../pages/ampa/ampa';
 export class MyApp {
   @ViewChild(Nav) nav: Nav;
   @ViewChild(Menu) menu: Menu;
-  rootPage:any = HomePage;
+  home:any = HomePage;
   ampa:any = AmpaPage;
+  queryBooking:any = QueryBookingPage;
+  rootPage:any = this.ampa;
 
   constructor(
               platform: Platform, 

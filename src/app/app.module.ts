@@ -9,12 +9,16 @@ import { ContactPage } from '../pages/contact/contact';
 import { HomePage } from '../pages/home/home';
 import { AmpaPage } from '../pages/ampa/ampa';
 import { TabsPage } from '../pages/tabs/tabs';
+import { QueryBookingPage } from '../pages/query-booking/query-booking';
+import { BookingPage } from '../pages/booking/booking';
 import { ReservationPage } from '../pages/reservation/reservation';
 
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
 import { BookStoreService } from './book-store.service';
 import { ComponentsModule } from '../components/components.module';
+import { HttpClientModule } from '@angular/common/http';
+
 
 @NgModule({
   declarations: [
@@ -24,13 +28,16 @@ import { ComponentsModule } from '../components/components.module';
     HomePage,
     AmpaPage,
     TabsPage,
-    ReservationPage
+    QueryBookingPage,
+    ReservationPage,
+    BookingPage
   ],
   imports: [
     BrowserModule,
     IonicModule.forRoot(MyApp),
     ComponentsModule,
-    JsonpModule 
+    JsonpModule,
+    HttpClientModule
   ],
   bootstrap: [IonicApp],
   entryComponents: [
@@ -40,7 +47,9 @@ import { ComponentsModule } from '../components/components.module';
     HomePage,
     AmpaPage,
     TabsPage,
-    ReservationPage
+    ReservationPage,
+    QueryBookingPage,
+    BookingPage
   ],
   providers: [
     StatusBar,

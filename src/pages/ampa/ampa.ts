@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { BookStoreService } from '../../app/book-store.service';
+import { IonicPage, NavController, NavParams, LoadingController } from 'ionic-angular';
 
 /**
  * Generated class for the AmpaPage page.
@@ -15,40 +16,18 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
 })
 export class AmpaPage {
 
-  public bookings = [
-    {
-      id: 123,
-      name : 'Aroa Marín Orts',
-      visible:true
-    },
-    {
-      id:232,
-      name : 'Hernán Marín Orts',
-      visible:true
-    },
-    {
-      id:332,
-      name : 'Marujita Díaz',
-      visible:true
-    },
-    {
-      id:432,
-      name : 'Isabel Pantoja',
-      visible:true
-    },
-    {
-      id:532,
-      name : 'Lola flores',
-      visible:true
-    },
-    {
-      id:632,
-      name : 'Rocío Durcal',
-      visible:true
-    }
-  ];
+  public bookings = [];
 
-  constructor(public navCtrl: NavController, public navParams: NavParams) {
+  public booking  ;
+  public phone: string = '619867940';
+  public code: string = '123';
+
+  public msg:string = '';
+
+  constructor(public navCtrl: NavController, public navParams: NavParams,
+    public bookStore: BookStoreService,
+    public loadingCtrl: LoadingController,
+  ) {
   }
 
   ionViewDidLoad() {
@@ -56,7 +35,34 @@ export class AmpaPage {
   }
 
   filterChange(filterText: string){
-    this.bookings.forEach(b=>b.visible=(''+b.id+b.name).toLowerCase().indexOf(filterText.toLowerCase())>=0)
+    this.bookings.forEach(b=>b.visible=(''+b.code+b.name).toLowerCase().indexOf(filterText.toLowerCase())>=0)
   }
+ query() {
+    console.log(this.query);
+    let loading = this.loadingCtrl.create({ content: 'Buscando...' });
+    loading.present(loading); //nav instance of NavController
+
+    this.bookStore.queryAll(this.phone, this.code)
+      .subscribe((data: any) => {
+        loading.dismiss();
+        if (data.error) {
+          this.bookings = [];
+          this.msg=data.msg;
+        } else {
+          this.msg='';
+          this.bookings = data.map(function(booking){ booking.visible=true; return booking; });
+        }
+        console.log("data received", data);
+      })
+  }
+
+  selectBooking(booking){
+    this.booking=booking;
+  }
+
+  closeBooking(){
+    this.booking=null;
+  }
+
 
 }

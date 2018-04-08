@@ -1,6 +1,10 @@
 {
-  "name": "ampaionic",
-  "app_id": "",
-  "type": "ionic-angular",
-  "integrations": {}
+    "name": "ampaionic",
+    "app_id": "",
+    "type": "ionic-angular",
+    "integrations": {},
+    "proxies": [{
+        "path": "/",
+        "proxyUrl": "https://wt-7974bf26aea1e45a705bc8d98047e57c-0.run.webtask.io/"
+    }]
 }

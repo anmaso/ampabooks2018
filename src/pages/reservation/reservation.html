@@ -7,6 +7,9 @@
 <ion-header>
 
     <ion-navbar>
+        <button ion-button menuToggle>
+        <ion-icon name="menu"></ion-icon>
+      </button>
         <ion-title>Reserva</ion-title>
     </ion-navbar>
 
@@ -21,20 +24,20 @@
             <ion-input [(ngModel)]="name"></ion-input>
         </ion-item>
         <ion-item>
-            <ion-label color="primary" stacked>Apellido1 del alumno/a</ion-label>
-            <ion-input [(ngModel)]="surname1"></ion-input>
+            <ion-label color="primary" stacked>Nombre completo de la madre</ion-label>
+            <ion-input [(ngModel)]="mother"></ion-input>
         </ion-item>
         <ion-item>
-            <ion-label color="primary" stacked>Apellido2 del alumno/a</ion-label>
-            <ion-input [(ngModel)]="surname2"></ion-input>
+            <ion-label color="primary" stacked>Teléfono de la madre</ion-label>
+            <ion-input [(ngModel)]="motherphone"></ion-input>
         </ion-item>
         <ion-item>
-            <ion-label color="primary" stacked>Nombre completo del padre o madre</ion-label>
-            <ion-input [(ngModel)]="parentName"></ion-input>
+            <ion-label color="primary" stacked>Nombre completo del padre</ion-label>
+            <ion-input [(ngModel)]="father"></ion-input>
         </ion-item>
         <ion-item>
-            <ion-label color="primary" stacked>Teléfono</ion-label>
-            <ion-input [(ngModel)]="phone"></ion-input>
+            <ion-label color="primary" stacked>Teléfono del padre</ion-label>
+            <ion-input [(ngModel)]="fatherphone"></ion-input>
         </ion-item>
         <ion-item>
             <ion-label color="primary" stacked>Email</ion-label>
@@ -53,6 +56,6 @@
 </ion-content>
 <ion-footer>
     <ion-toolbar>
-        <button ion-button>Confirmar la reserva</button>
+        <button ion-button (click)="book()">Confirmar la reserva</button>
     </ion-toolbar>
 </ion-footer>

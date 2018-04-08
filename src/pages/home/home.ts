@@ -4,6 +4,7 @@ import { Book } from '../../app/book';
 import { Course } from '../../app/course';
 import { BookStoreService } from '../../app/book-store.service';
 import { ReservationPage } from '../reservation/reservation';
+import { AmpaPage } from '../ampa/ampa';
 import { ActionSheetController } from 'ionic-angular';
 
 @Component({
@@ -18,7 +19,8 @@ export class HomePage {
   searchText: string = "";
   total: number = 0;
   totalBooks: number = 0;
-  reservationPage:any = ReservationPage;
+  //reservationPage:any = ReservationPage;
+  reservationPage:any = AmpaPage;
 
   constructor(public navCtrl: NavController, 
               public navParams: NavParams, 
