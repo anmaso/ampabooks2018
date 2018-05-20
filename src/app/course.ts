@@ -10,6 +10,7 @@ export class Course {
 
     static getCourses() : Course[]{
         return [
+            {name:"3º Infantil", value:"3 Inf"},
             {name:"4º Infantil", value:"4 inf"},
             {name:"5º Infantil", value:"5 inf"},
             {name:"1º Primaria", value:"1Pri"},

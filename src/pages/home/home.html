@@ -22,22 +22,26 @@
             <div ion-item *ngIf="book.visible" (click)="selectBook(book, $event)" [class.selected]="book.count>0">
                 <ion-grid>
                     <ion-row>
-                        <ion-col col-1>
-                            {{book.group}}
-                        </ion-col>
-                        <ion-col text-wrap class="bookname">
                             {{book.name}}
-                        </ion-col>
                     </ion-row>
                     <ion-row>
-                        <ion-col col-1>
-                        </ion-col>
                         <ion-col>
-                            <h2>{{book.price}} €</h2>
+                            <h2 class="price">{{book.price}} €</h2>
                         </ion-col>
                         <ion-col>
                             <span *ngIf="book.lang=='C'" class="castellano">Castellano</span>
                             <span color="danger" *ngIf="book.lang=='V'" class="valencia">Valenciá</span>
+                        </ion-col>
+                    </ion-row>
+                    <ion-row>
+                        <ion-col col-1>
+                            <div class="group group{{book.group}}">{{book.group}}</div>
+                        </ion-col>
+                        <ion-col>
+                            {{book.ISBN}}
+                        </ion-col>
+                        <ion-col>
+                            {{book.editorial}}
                         </ion-col>
                     </ion-row>
                 </ion-grid>

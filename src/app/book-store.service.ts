@@ -24,10 +24,12 @@ export class BookStoreService {
             .then(res=>  res.text())
             .then(text=>{
                 //return this.BOOKS=text.split('#').map((line,idx)=>new Book(idx+1, ...line.split(',')))
-                return this.BOOKS=text.split('#').map((line,idx)=>{
+                var books = this.BOOKS=text.split('#').map((line,idx)=>{
                     var b = line.split(',');
                     return new Book(idx+1, b[0], parseInt(b[1], 10), b[2], b[3], b[4], b[5], parseInt(b[6], 10));
                 });
+                console.log(books);
+                return books;
             })
             .catch(e=>console.error(e))
     }
