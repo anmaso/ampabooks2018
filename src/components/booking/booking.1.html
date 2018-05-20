@@ -5,7 +5,7 @@ booking component
             <ion-col col-3>Fecha reserva: </ion-col>
             <ion-col>
                 <b>
-                    <ion-datetime displayFormat="MM/DD/YYYY" [(ngModel)]="booking.date"></ion-datetime>
+                    <ion-datetime displayFormat="DD/MM/YYYY" [(ngModel)]="booking.date"></ion-datetime>
                 </b>
             </ion-col>
 
@@ -21,11 +21,23 @@ booking component
             <ion-col>
                 <b>{{booking.mother}}</b>
             </ion-col>
+            <ion-col>
+                <b>{{booking.motherphone}}</b>
+            </ion-col>
+            <ion-col>
+                <b>{{booking.motherdni}}</b>
+            </ion-col>
         </ion-row>
         <ion-row>
             <ion-col col-3>Padre</ion-col>
             <ion-col>
                 <b>{{booking.father}}</b>
+            </ion-col>
+            <ion-col>
+                <b>{{booking.fatherphone}}</b>
+            </ion-col>
+            <ion-col>
+                <b>{{booking.fatherdni}}</b>
             </ion-col>
         </ion-row>
         <ion-row>

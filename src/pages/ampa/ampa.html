@@ -42,11 +42,11 @@
 
 <ion-content>
    <ng-container *ngIf="booking!=null">
-       <button ion-button clear color="primary" (click)="closeBooking()">
-           Close&nbsp;&nbsp;
+       <button ion-button outline color="primary" (click)="closeBooking()">
+           Cerrar&nbsp;&nbsp;
            <ion-icon name="close-circle"></ion-icon>
        </button>
-    <booking [booking]="booking"></booking>
+            <booking [booking]="booking"></booking>
    </ng-container> 
     <ion-list *ngIf="!booking">
         <ng-container *ngFor="let booking of bookings">

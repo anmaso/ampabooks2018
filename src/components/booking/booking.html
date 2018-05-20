@@ -1,45 +1,14 @@
 <div *ngIf="booking.name">
-    <ion-grid>
-        <ion-row>
-            <ion-col col-3>Fecha reserva: </ion-col>
-            <ion-col>
-                <b>
-                    <ion-datetime displayFormat="MM/DD/YYYY" [(ngModel)]="booking.date"></ion-datetime>
-                </b>
-            </ion-col>
+    <ion-card>
+        <ion-card-header style="background: lightgoldenrodyellow">{{booking.name}}</ion-card-header>
+        <ion-card-content style="background: lightyellow">
+            <ion-datetime disabled displayFormat="MM/DD/YYYY" [(ngModel)]="booking.date"></ion-datetime>
+            <div>Madre: <b> {{booking.mother}} {{booking.motherphone}} {{booking.motherdni}}</b></div>
+            <div>Padre: <b> {{booking.father}} {{booking.fatherphone}} {{booking.fatherdni}}</b></div>
+            <div>Libros : {{booking.books.length}} Total: {{booking.total}} €</div>
+        </ion-card-content>
 
-        </ion-row>
-        <ion-row>
-            <ion-col col-3>Nombre</ion-col>
-            <ion-col>
-                <b>{{booking.name}}</b>
-            </ion-col>
-        </ion-row>
-        <ion-row>
-            <ion-col col-3>Madre</ion-col>
-            <ion-col>
-                <b>{{booking.mother}}</b>
-            </ion-col>
-        </ion-row>
-        <ion-row>
-            <ion-col col-3>Padre</ion-col>
-            <ion-col>
-                <b>{{booking.father}}</b>
-            </ion-col>
-        </ion-row>
-        <ion-row>
-            <ion-col col-3> Libros: </ion-col>
-            <ion-col>
-                <b>{{booking.books.length}}</b>
-            </ion-col>
-        </ion-row>
-        <ion-row>
-            <ion-col col-3> Precio total: </ion-col>
-            <ion-col>
-                <b>{{booking.total}} €</b>
-            </ion-col>
-        </ion-row>
-    </ion-grid>
+    </ion-card>
 </div>
 <ng-container *ngFor="let book of booking.books">
     <ion-card>

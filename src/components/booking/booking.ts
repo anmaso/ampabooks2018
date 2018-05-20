@@ -14,7 +14,10 @@ export class BookingComponent {
 
   @Input() booking;
 
-  constructor() {
+  ngOnInit() {
+    console.log("bookin=", this.booking);
+    var total = this.booking.books.reduce( (acc, b)=> acc+(b.price*b.count), 0);
+    this.booking.total = total;
   }
 
 }
