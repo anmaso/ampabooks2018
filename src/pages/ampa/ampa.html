@@ -24,7 +24,7 @@
             </ion-col>
             <ion-col>
                 <ion-label color="primary" stacked></ion-label>
-                <button ion-button color="primary" (click)="query()">Validar&nbsp;&nbsp;
+                <button ion-button color="primary" (click)="query()" [disabled]="!(code&&phone)">Validar&nbsp;&nbsp;
                     <ion-icon name="checkmark"></ion-icon>
                 </button>
             </ion-col>
@@ -34,6 +34,7 @@
         <ion-row>
         <ion-label color="primary" fixed>Filtrar</ion-label>
         <ion-input #filterText placeholder="Código de reserva, nombre" (input)="filterChange(filterText.value)"></ion-input>
+        <button ion-button (click)="export()">Descargar</button>
         </ion-row>
     </ion-grid>
 
@@ -41,8 +42,8 @@
 
 <ion-content>
    <ng-container *ngIf="booking!=null">
-       <button ion-button color="primary" (click)="closeBooking()">
-           Close
+       <button ion-button clear color="primary" (click)="closeBooking()">
+           Close&nbsp;&nbsp;
            <ion-icon name="close-circle"></ion-icon>
        </button>
     <booking [booking]="booking"></booking>
@@ -52,6 +53,8 @@
             <div ion-item *ngIf="booking.visible" (click)="selectBooking(booking)">
                 <ion-badge>{{booking.code}}</ion-badge>
                 {{booking.name}}
+                <p>{{booking.mother}}</p>
+                <p>{{booking.father}}</p>
             </div>
         </ng-container>
     </ion-list>

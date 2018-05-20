@@ -32,6 +32,10 @@
             <ion-input [(ngModel)]="motherphone"></ion-input>
         </ion-item>
         <ion-item>
+            <ion-label color="primary" stacked>DNI de la madre</ion-label>
+            <ion-input [(ngModel)]="motherdni"></ion-input>
+        </ion-item>
+        <ion-item>
             <ion-label color="primary" stacked>Nombre completo del padre</ion-label>
             <ion-input [(ngModel)]="father"></ion-input>
         </ion-item>
@@ -40,14 +44,11 @@
             <ion-input [(ngModel)]="fatherphone"></ion-input>
         </ion-item>
         <ion-item>
-            <ion-label color="primary" stacked>Email</ion-label>
-            <ion-input [(ngModel)]="email"></ion-input>
+            <ion-label color="primary" stacked>DNI del padre</ion-label>
+            <ion-input [(ngModel)]="fatherdni"></ion-input>
         </ion-item>
     </ion-list>
-    <h2>Total de la reserva: {{navParams.data.total}} €</h2>
-    <p>Tu reserva será la:
-        <ion-badge>{{reservationNumber}}</ion-badge>
-    </p>
+    <h2>Total de la reserva: {{navParams.data.totalBooks}} libros = {{navParams.data.total}} €</h2>
     <ion-list>
         <ion-list-header>Libros reservados</ion-list-header>
         <div ion-item *ngFor="let book of books">{{book.count}} x {{book.name}}</div>
@@ -56,6 +57,6 @@
 </ion-content>
 <ion-footer>
     <ion-toolbar>
-        <button ion-button (click)="book()">Confirmar la reserva</button>
+        <button ion-button [disabled]="book.motherphone||book.fatherphone" (click)="book()">Confirmar la reserva</button>
     </ion-toolbar>
 </ion-footer>

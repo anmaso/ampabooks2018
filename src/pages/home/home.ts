@@ -4,7 +4,6 @@ import { Book } from '../../app/book';
 import { Course } from '../../app/course';
 import { BookStoreService } from '../../app/book-store.service';
 import { ReservationPage } from '../reservation/reservation';
-import { AmpaPage } from '../ampa/ampa';
 import { ActionSheetController } from 'ionic-angular';
 
 @Component({
@@ -19,16 +18,34 @@ export class HomePage {
   searchText: string = "";
   total: number = 0;
   totalBooks: number = 0;
+  booking: any;
   //reservationPage:any = ReservationPage;
-  reservationPage:any = AmpaPage;
 
   constructor(public navCtrl: NavController, 
               public navParams: NavParams, 
               public bookStore: BookStoreService,
               public actionSheetCtrl: ActionSheetController) {
+    var data = this.navParams.data ;
     this.bookStore.getBooks().then((books) => {
       this.books = books;
+      if (data&& data.booking){
+        this.booking=data.booking;
+        this.selectedCourse=data.booking.books[0].course;
+
+        var byISBN=this.navParams.data.booking.books.reduce((acc,b)=>{
+          acc[b.ISBN]=b.count;
+          return acc;
+        }, {});
+        this.books.forEach(b=>{
+          if (byISBN[b.ISBN]){
+            b.visible=true;
+            b.count=byISBN[b.ISBN];
+          }
+        });
+      }
+      this.calculateTotal();
     });
+
 
   }
 
@@ -38,7 +55,9 @@ export class HomePage {
   reservation(){
     this.navCtrl.push(ReservationPage, {
       books: this.books,
-      total: this.total
+      totalBooks: this.totalBooks,
+      total: this.total,
+      booking: this.booking
     });
   }
 
@@ -102,5 +121,10 @@ export class HomePage {
       ]
     });
     actionSheet.present();
+  }
+
+  selectAll(){
+    (this.books||[]).forEach((b)=> { if (b.visible) b.count=1});
+    this.calculateTotal();
   }
 }

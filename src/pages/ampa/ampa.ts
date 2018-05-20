@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { BookStoreService } from '../../app/book-store.service';
 import { IonicPage, NavController, NavParams, LoadingController } from 'ionic-angular';
 
+
 /**
  * Generated class for the AmpaPage page.
  *
@@ -12,21 +13,21 @@ import { IonicPage, NavController, NavParams, LoadingController } from 'ionic-an
 @IonicPage()
 @Component({
   selector: 'page-ampa',
-  templateUrl: 'ampa.html',
+  templateUrl: 'ampa.html'
 })
 export class AmpaPage {
 
   public bookings = [];
 
   public booking  ;
-  public phone: string = '619867940';
-  public code: string = '123';
+  public phone: string = '';
+  public code: string = '';
 
   public msg:string = '';
 
   constructor(public navCtrl: NavController, public navParams: NavParams,
     public bookStore: BookStoreService,
-    public loadingCtrl: LoadingController,
+    public loadingCtrl: LoadingController
   ) {
   }
 
@@ -34,8 +35,19 @@ export class AmpaPage {
     console.log('ionViewDidLoad AmpaPage');
   }
 
+  bookingContains(booking: any, text:string){
+    return (''+
+      booking.name + '#'+
+      booking.father +  '#'+
+      booking.mother +  '#'+
+      booking.fatherdni +  '#'+
+      booking.motherdni +  '#'+
+      booking.fatherphone +  '#'+
+      booking.motherphone).toLowerCase().indexOf(text.toLowerCase())>=0;
+  }
+
   filterChange(filterText: string){
-    this.bookings.forEach(b=>b.visible=(''+b.code+b.name).toLowerCase().indexOf(filterText.toLowerCase())>=0)
+    this.bookings.forEach(b=>b.visible=this.bookingContains(b,filterText));
   }
  query() {
     console.log(this.query);
@@ -54,6 +66,10 @@ export class AmpaPage {
         }
         console.log("data received", data);
       })
+  }
+
+  export(){
+    window.open('https://wt-7974bf26aea1e45a705bc8d98047e57c-0.sandbox.auth0-extend.com/ampa-db/ampa/bookings/csv/'+this.phone+'/'+this.code, 'libros.csv');
   }
 
   selectBooking(booking){

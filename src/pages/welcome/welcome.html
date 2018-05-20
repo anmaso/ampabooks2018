@@ -1,0 +1,46 @@
+<!--
+  Generated template for the WelcomePage page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header>
+
+  <ion-navbar>
+    <ion-title>AMPA Sagrado Coraz&oacute;n</ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content padding style="text-align:center;">
+  <ion-grid>
+    <ion-row>
+      <ion-col>
+        <img src="/assets/imgs/logo.jpg" width="50%"/>
+      </ion-col>
+      <ion-col>
+        <img src="/assets/imgs/books.png" width="50%"/>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+  <h1>APP de reserva de libros</h1>
+  <ion-card style="background:lightgoldenrodyellow">
+    <ion-card-header>
+      <h2 style="font-weight: bold">Aplicación en pruebas!</h2>
+    </ion-card-header>
+    <ion-card-content>
+      <div>Las reservas que se hagan en esta fase de pruebas no se tendrán en cuenta.</div>
+    </ion-card-content>
+  </ion-card>
+  <ion-list>
+    <button ion-item color="primary" (click)="gotoReserva()">&nbsp;Nueva reserva</button>
+    <button ion-item color="primary" (click)="gotoViewReserva()">&nbsp;Ver una reserva</button>
+    <p></p>
+    <button ion-item color="danger" (click)="gotoAmpa()">&nbsp;AMPA: ver reservas</button>
+    <p></p>
+    <a ion-item color="light" href="http://www.ampasagradocorazonmeliana.com">&nbsp;Ir a la página web del AMPA</a>
+
+  </ion-list>
+
+</ion-content>

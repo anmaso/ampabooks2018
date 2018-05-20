@@ -14,7 +14,7 @@
     </ion-navbar>
     <ion-grid>
         <ion-row>
-            <p>Introduce tu número de teléfono y el código de la reserva para ver la información de tu reserva</p>
+            <p>Introduce un número de teléfono y DNI para ver la información de reservas disponibles</p>
         </ion-row>
         <ion-row>
             <ion-col>
@@ -22,8 +22,8 @@
                 <ion-input #phone name="phone" [(ngModel)]="bookingQuery.phone" placeholder="Teléfono"></ion-input>
             </ion-col>
             <ion-col>
-                <ion-label color="primary" stacked>Código</ion-label>
-                <ion-input #code name="code" [(ngModel)]="bookingQuery.code" placeholder="Código"></ion-input>
+                <ion-label color="primary" stacked>dni</ion-label>
+                <ion-input [(ngModel)]="bookingQuery.dni" placeholder="DNI"></ion-input>
             </ion-col>
             <ion-col>
                 <ion-label color="primary" stacked></ion-label>
@@ -38,16 +38,36 @@
 </ion-header>
 
 
-<ion-content padding>
-            <ion-card *ngIf="msg">
-                <ion-card-header>Error</ion-card-header>
-                <ion-card-content>
-                <p>{{msg}}</p>
-            <p>Si no recuerdas el número, te reenviamos un correo al email de la reserva y pinchando
-                <a href="#">aqui</a>
-            </p>
+<ion-content>
+    <ion-card *ngIf="msg">
+        <ion-card-header>Error</ion-card-header>
+        <ion-card-content>
+        <p>{{msg}}</p>
+    <p>Si no recuerdas el número, te reenviamos un correo al email de la reserva y pinchando
+        <a href="#">aqui</a>
+    </p>
+        </ion-card-content>
+    </ion-card>
+    <ng-container *ngIf="error.length>1 || bookings.length==0">
+        Error al consultar los datos o no hay datos
+    </ng-container>
+    <ng-container *ngIf="bookings.length>1">
+        <ng-container *ngFor="let booking of bookings">
+            <ion-card>
+                <ion-card-content (click)="selectBooking(booking)">
+                    <ion-grid>
+                        <ion-row>
+                            <ion-col>{{booking.name}}</ion-col>
+                            <ion-col>Libros: {{booking.books.length}}<br/>Total: {{booking.total}} €</ion-col>
+                            <ion-col><ion-datetime displayFormat="MM/DD/YYYY" [(ngModel)]="booking.date"></ion-datetime></ion-col>
+                        </ion-row>
+                    </ion-grid>
                 </ion-card-content>
             </ion-card>
-            <booking [booking]="booking"></booking>
+        </ng-container>
+    </ng-container>
+    <button *ngIf="booking.books.length" ion-button (click)="edit()">Editar</button>
+    <button *ngIf="booking.books.length" ion-button color="danger" (click)="delete()">Eliminar reserva</button>
+    <booking [booking]="booking"></booking>
 
 </ion-content>

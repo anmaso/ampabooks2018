@@ -21,6 +21,7 @@
     "@angular/platform-browser": "5.0.3",
     "@angular/platform-browser-dynamic": "5.0.3",
     "@ionic-native/core": "4.4.0",
+    "@ionic-native/file-transfer": "^4.7.0",
     "@ionic-native/splash-screen": "4.4.0",
     "@ionic-native/status-bar": "4.4.0",
     "@ionic/pro": "1.0.16",
@@ -28,6 +29,7 @@
     "ionic-angular": "3.9.2",
     "ionicons": "3.0.0",
     "node-sass": "^4.7.2",
+    "raven-js": "^3.24.1",
     "rxjs": "5.5.2",
     "sw-toolbox": "3.6.0",
     "zone.js": "0.8.18"

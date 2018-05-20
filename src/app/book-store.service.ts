@@ -1,21 +1,22 @@
 import { Injectable } from '@angular/core';
 import { Book } from './book';
 import { Jsonp } from '@angular/http';
-import { HttpClient } from '@angular/common/http';
+import { HttpHeaders, HttpClient } from '@angular/common/http';
 
 
 @Injectable()
 export class BookStoreService {
+    BASE = 'https://wt-7974bf26aea1e45a705bc8d98047e57c-0.sandbox.auth0-extend.com/ampa-db';
 
-    GET_BOOKS_URL = 'https://wt-7974bf26aea1e45a705bc8d98047e57c-0.run.webtask.io/ampa-get-books';
-    POST_BOOKING_URL = 'https://wt-7974bf26aea1e45a705bc8d98047e57c-0.run.webtask.io/ampa-db';
-    GET_BOOKING_URL = 'https://wt-7974bf26aea1e45a705bc8d98047e57c-0.run.webtask.io/ampa-db/booking/get';
-    GET_BOOKINGS_URL = 'https://wt-7974bf26aea1e45a705bc8d98047e57c-0.run.webtask.io/ampa-db/ampa/bookings/get';
+    GET_BOOKS_URL = 'https://wt-7974bf26aea1e45a705bc8d98047e57c-0.sandbox.auth0-extend.com/ampa-get-books';
+    POST_BOOKING_URL = this.BASE;
+    GET_BOOKING_URL = this.BASE+'/booking/get';
+    GET_BOOKINGS_URL = this.BASE+'/ampa/bookings/get';
     JSONP_CALLBACK = 'callback=JSONP_CALLBACK';
+    MAIL_URL = 'https://wt-7974bf26aea1e45a705bc8d98047e57c-0.run.webtask.io/ampa-mail';
     BOOKS: Book[];
 
     constructor(private jsonp: Jsonp, private http: HttpClient) {
-        var count = 1;
     }
 
     getBooks(): Promise<any> {
@@ -38,19 +39,41 @@ export class BookStoreService {
         return this.http.get(`${this.GET_BOOKINGS_URL}/${phone}/${code}`);
     }
 
-    save({code, name,  mother, father, motherphone, fatherphone, email, books}){
-        var data={
-            code,
+    save(_id, { name,  mother, father, motherphone, fatherphone, email, books, motherdni, fatherdni}){
+        var data:any={
             name,
             father,
             mother,
             motherphone,
             fatherphone,
+            fatherdni,
+            motherdni,
             email,
             books,
             date: new Date()
         };
-        return this.http.post(`${this.POST_BOOKING_URL}/save/${code}/${email}`, data);
+        if (_id){
+            data._id=_id;
+        }
+        return this.http.post(`${this.POST_BOOKING_URL}/save`, data);
+    }
+
+    delete(_id){
+        return this.http.delete(`${this.POST_BOOKING_URL}/booking/${_id}`);
+    }
+
+    mail(to, subject, text){
+        const httpOptions = {
+            headers: new HttpHeaders({
+              'Content-Type':  'application/json',
+              'Authorization': 'my-auth-token'
+            })
+          };
+        this.http.post(`${this.MAIL_URL}`,{
+            to,
+            text,
+            subject
+        }, httpOptions)
     }
 
 }
